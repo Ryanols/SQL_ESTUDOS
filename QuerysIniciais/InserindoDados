@@ -1,0 +1,30 @@
+-- Vamos ver como colocamos dados em nossas tabelas
+-- Quando for colocar dados em nossas tabelas os textos sao com aspas siples, mesma coisa com as datas
+
+SELECT * FROM dbo.ALUNOS -- Pega todas as tabelas e direciona para a que foi escolhida e serve para mostrar a tabela tbm
+
+INSERT INTO dbo.ALUNOS 
+( ID_ALUNO , NOME , DATA_NASCIMENTO , SEXO , DATA_CADASTRO , LOGIN_CADASTRO)
+VALUES
+(3, 'Maria Helena De Almeida' , '11/11/1984' , 'F' , '24/02/2026 20:20:00' , 'Zlobin')
+
+SELECT * FROM dbo.ALUNOS
+
+insert into 
+dbo.CURSOS (ID_CURSO , NOME_CURSO , DATA_CADASTRO , LOGIN_CADASTRO)
+values
+(1 , 'VBA1' , '24/02/2026 20:20:00' , 'Zlobin')
+
+select * from dbo.CURSOS
+
+insert into dbo.SITUACAO 
+(ID_SITUACAO , SITUACAO , DATA_CADASTRO , LOGIN_CADASTRO)
+values
+(1 , 'Presente' , '24/02/2026 20:50:00' , 'Zlobin')
+
+insert into dbo.SITUACAO 
+(ID_SITUACAO , SITUACAO , DATA_CADASTRO , LOGIN_CADASTRO)
+values
+(2 , 'Faltou' , '24/02/2026 20:50:00' , 'Zlobin')
+
+select count(*) from dbo.SITUACAO -- Conta contos registros tem
