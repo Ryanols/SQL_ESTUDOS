@@ -1,0 +1,53 @@
+-- Comandos basicos em um banco de dados
+
+CREATE DATABASE ESTUDO_BANCO; -- CRIANDO UM NOVO BANCO
+
+-- Temos os comandos de criação, alteração e de excluir
+-- CREATE , ALTER E DROPA
+
+CREATE TABLE PRODUTOS (
+	ID_PRODUTO INT NOT NULL PRIMARY KEY IDENTITY(1 , 1),
+	ID_MARCA INT NOT NULL,
+	NOME VARCHAR (100),
+	PRECO DECIMAL NOT NULL, -- Decimal ou numeric serve mais para quantidade de dinheiro
+	ESTOQUE INT DEFAULT 0
+
+);
+
+--IDENTITY(1 , 1) serve para que o proprio banco entenda que vai incrementar sozinho
+--DEFAULT 0 serve para que caso não colque valor o 0 vai ocupar esse espaço
+
+
+--Essa deve ser criada primeiro para não dar erro
+CREATE TABLE MARCAS (
+	ID_MARCA INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	NOME VARCHAR (100) NOT NULL UNIQUE, --UNIQUE serve para que o nome não se repita
+	SITE VARCHAR (100),
+	TELEFONE VARCHAR
+
+);
+
+--Dai precisamos criar nossa chaves estrangeiras
+ALTER TABLE PRODUTOS
+	ADD CONSTRAINT FK_ID_MARCA FOREIGN KEY (ID_MARCA) REFERENCES MARCAS (ID_MARCA)
+
+/*
+ALTER TABLE nome_tabela
+ADD CONSTRAINT nome_da_constraint
+FOREIGN KEY (coluna)
+REFERENCES tabela_referenciada(coluna_referenciada);
+*/
+
+--O comando Alter Table nos da o poder de mudar qualquer coisa em nossas tabelas
+ALTER TABLE PRODUTOS ALTER COLUMN NOME VARCHAR (150);
+
+--Quero excluir uma tabela que nao me satisfaz mais
+
+CREATE TABLE TESTE (
+	NOME VARCHAR (100),
+	DATA_CADASTRO DATETIME
+
+);
+
+DROP TABLE IF EXISTS TESTE; -- O if exists serve para fazer algo somente se existir
+
