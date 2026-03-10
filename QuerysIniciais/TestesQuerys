@@ -1,0 +1,58 @@
+--Inserindo dados aleatorios em nossas tabelas
+
+
+ALTER TABLE	MARCAS ALTER COLUMN TELEFONE VARCHAR (100);
+-- Tive que fazer uma mudança pois eles não estavam aceitando a quantidade de caracteres
+
+
+--Aqui o id está com o auto incremento
+select * from dbo.MARCAS 
+
+insert dbo.MARCAS 
+	(NOME , SITE , TELEFONE)
+VALUES
+	('Dell' , 'dell.com' , '0800-970-3355'),
+	('Herman MIller' , 'hermanmiller.com.br' , '(11) 347-8043'),
+	('Shure' , 'shure.com.br' , '0800-970-3355')
+
+
+select * from dbo.PRODUTOS
+
+insert dbo.PRODUTOS
+	(NOME ,	PRECO , ESTOQUE , ID_MARCA)
+values
+	('iphone 15 (128gb)' , 4599.00 , 50 , 8),
+	('mackbook (1T)' , 9899.00 , 100 , 8),
+	('Notebook Inspirion' , 8899.99 , 23 , 10)
+ -- Nesse caso aqui o valor do id_marca ja tem que existir e tem que ser o mesmo, nao sei como pegar automatico ainda
+
+-- Vamos usar um pouco do nosso select
+select * from dbo.PRODUTOS --Mostra todos os dados da tabela
+--Podemos buscar por campo tambem por exemplo somente por id
+select  nome from MARCAS;
+
+--Vamos testar algumas consultas no nosso sistema, para isso vou criar uma nova tabela temporario
+
+create table produtos_apple (
+	nome_carta varchar (150),
+	estoque int not null
+)
+--Tem como pegar os dados de uma tabela e passar para outra
+insert into produtos_apple 
+select nome , estoque from produtos where id_marca = 8; --Pegou tudo  que tem o mesmo id e colocou 
+
+select * from produtos_apple
+
+--Vamos usar essa nossa tabela de teste para apagar todos os registros de uma só vez]
+truncate table produtos_apple;
+
+--No nosso dia a dioa a atualização dos dados é muito importante. Usamos o comando update para isso
+update  PRODUTOS
+set nome = 'Microfone GS Cout' --Temos ue tomar muiuto cuidado por essa duas llinhas atualizam todos os registros
+where ID_PRODUTO = 8;
+
+update  PRODUTOS
+set nome = 'Microfone GS Cout' 
+where NOME = 'Microfone SM PReto'; -- Pode ser usado qualquer campo para fazer isso
+
+select * from dbo.PRODUTOS
